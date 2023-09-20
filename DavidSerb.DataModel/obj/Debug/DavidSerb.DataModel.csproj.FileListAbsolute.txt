@@ -1,0 +1,6 @@
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.DataModel\bin\Debug\DavidSerb.DataModel.dll
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.DataModel\bin\Debug\DavidSerb.DataModel.pdb
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.DataModel\obj\Debug\DavidSerb.DataModel.csproj.AssemblyReference.cache
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.DataModel\obj\Debug\DavidSerb.DataModel.csproj.CoreCompileInputs.cache
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.DataModel\obj\Debug\DavidSerb.DataModel.dll
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.DataModel\obj\Debug\DavidSerb.DataModel.pdb
