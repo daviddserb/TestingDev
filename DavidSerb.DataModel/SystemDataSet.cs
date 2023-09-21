@@ -106,42 +106,45 @@ namespace DavidSerb.DataModel
             DrugTypes.Add(dt2);
         }
 
-        public void AssociateDrugs(string depotId, int startPickNumber, int endPickNumber)
-        {
-            Depot depot = Depots.FirstOrDefault(dep => dep.DepotId == depotId);
-            if (depot != null)
-            {
-                List<DrugUnit> drugUnitsToAssociate = DrugUnits
-                    .Where(drugUnit => drugUnit.PickNumber >= startPickNumber && drugUnit.PickNumber <= endPickNumber)
-                    .ToList();
+        // ### Old AssociateDrugs
+        //public void associatedrugs(string depotid, int startpicknumber, int endpicknumber)
+        //{
+        //    depot depot = depots.firstordefault(dep => dep.depotid == depotid);
+        //    if (depot != null)
+        //    {
+        //        list<drugunit> drugunitstoassociate = drugunits
+        //            .where(drugunit => drugunit.picknumber >= startpicknumber && drugunit.picknumber <= endpicknumber)
+        //            .tolist();
 
-                if (drugUnitsToAssociate.Count == 0) Console.WriteLine($"There are no DrugUnits with the PickNumber between ({startPickNumber}, {endPickNumber}).");
-                else
-                {
-                    foreach (DrugUnit drugUnit in drugUnitsToAssociate)
-                    {
-                        if (drugUnit.Depot != null) Console.WriteLine($"DrugUnit {drugUnit.DrugUnitId} is already associated to Depot.");
-                        else drugUnit.Depot = depot;
-                    }
-                }
-            }
-            else Console.WriteLine($"Depot with id {depotId} not found.");
-        }
-        public void DisassociateDrugs(int startPickNumber, int endPickNumber)
-        {
-            List<DrugUnit> drugUnitsToDisassociate = DrugUnits
-                .Where(drugUnit => drugUnit.PickNumber >= startPickNumber && drugUnit.PickNumber <= endPickNumber)
-                .ToList();
+        //        if (drugunitstoassociate.count == 0) console.writeline($"there are no drugunits with the picknumber between ({startpicknumber}, {endpicknumber}).");
+        //        else
+        //        {
+        //            foreach (drugunit drugunit in drugunitstoassociate)
+        //            {
+        //                if (drugunit.depot != null) console.writeline($"drugunit {drugunit.drugunitid} is already associated to depot.");
+        //                else drugunit.depot = depot;
+        //            }
+        //        }
+        //    }
+        //    else console.writeline($"depot with id {depotid} not found.");
+        //}
 
-            if (drugUnitsToDisassociate.Count == 0) Console.WriteLine($"There are no DrugUnits with the PickNumber between ({startPickNumber}, {endPickNumber}).");
-            else
-            {
-                foreach (DrugUnit drugUnit in drugUnitsToDisassociate)
-                {
-                    if (drugUnit.Depot != null) drugUnit.Depot = null;
-                    else Console.WriteLine($"DrugUnit {drugUnit.DrugUnitId} is not associated with Depot.");
-                }
-            }
-        }
+        // ### Old DisassociateDrugs
+        //public void DisassociateDrugs(int startPickNumber, int endPickNumber)
+        //{
+        //    List<DrugUnit> drugUnitsToDisassociate = DrugUnits
+        //        .Where(drugUnit => drugUnit.PickNumber >= startPickNumber && drugUnit.PickNumber <= endPickNumber)
+        //        .ToList();
+
+        //    if (drugUnitsToDisassociate.Count == 0) Console.WriteLine($"There are no DrugUnits with the PickNumber between ({startPickNumber}, {endPickNumber}).");
+        //    else
+        //    {
+        //        foreach (DrugUnit drugUnit in drugUnitsToDisassociate)
+        //        {
+        //            if (drugUnit.Depot != null) drugUnit.Depot = null;
+        //            else Console.WriteLine($"DrugUnit {drugUnit.DrugUnitId} is not associated with Depot.");
+        //        }
+        //    }
+        //}
     }
 }

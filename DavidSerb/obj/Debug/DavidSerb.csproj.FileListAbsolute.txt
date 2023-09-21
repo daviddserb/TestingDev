@@ -8,3 +8,5 @@ C:\Users\dserb\source\repos\DavidSerb\DavidSerb\obj\Debug\DavidSerb.csproj.CoreC
 C:\Users\dserb\source\repos\DavidSerb\DavidSerb\obj\Debug\DavidSerb.csproj.CopyComplete
 C:\Users\dserb\source\repos\DavidSerb\DavidSerb\obj\Debug\DavidSerb.exe
 C:\Users\dserb\source\repos\DavidSerb\DavidSerb\obj\Debug\DavidSerb.pdb
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb\bin\Debug\DavidSerb.Domain.dll
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb\bin\Debug\DavidSerb.Domain.pdb

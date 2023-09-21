@@ -1,0 +1,9 @@
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Domain\bin\Debug\DavidSerb.Domain.dll
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Domain\bin\Debug\DavidSerb.Domain.pdb
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Domain\bin\Debug\DavidSerb.DataModel.dll
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Domain\bin\Debug\DavidSerb.DataModel.pdb
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Domain\obj\Debug\DavidSerb.Domain.csproj.AssemblyReference.cache
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Domain\obj\Debug\DavidSerb.Domain.csproj.CoreCompileInputs.cache
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Domain\obj\Debug\DavidSerb.Domain.csproj.CopyComplete
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Domain\obj\Debug\DavidSerb.Domain.dll
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Domain\obj\Debug\DavidSerb.Domain.pdb

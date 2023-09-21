@@ -54,6 +54,10 @@
       <Project>{7df33fb5-89d2-4d1b-914c-fe2a78bef637}</Project>
       <Name>DavidSerb.DataModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DavidSerb.Domain\DavidSerb.Domain.csproj">
+      <Project>{7a1fdf05-1edd-4249-9b53-c8a58618c556}</Project>
+      <Name>DavidSerb.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
