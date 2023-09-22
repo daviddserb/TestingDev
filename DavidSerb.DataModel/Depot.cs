@@ -21,7 +21,6 @@ namespace DavidSerb.DataModel
         {
             DepotId = depotId;
             DepotName = depotName;
-            // ??? nu stiu daca trb. initializat si Countries, pt. ca, cand se construieste un Depot stim si la ce Countries va livra?
             Countries = new List<Country>();
         }
     }

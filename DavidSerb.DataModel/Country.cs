@@ -21,7 +21,6 @@ namespace DavidSerb.DataModel
         {
             CountryId = countryId;
             CountryName = countryName;
-            // ??? poate trb. sa adaug si DepotId pt. ca atunci cand cream o Country ar trb. sa cunoastem si de la ce Depot se aprovizioneaza?
         }
     }
 }

@@ -8,18 +8,42 @@ using System.Threading.Tasks;
 
 namespace DavidSerb.Domain.CorrelationService
 {
-    public class DepotCorrelationService : BaseCorrelationService<List<Depot>>
+    public class DepotCorrelationService : BaseCorrelationService<List<CorrelateData>>
     {
-        // ??? dc trebuie sa fac constructor? adica de ce am eroare daca il comentez
         public DepotCorrelationService(SystemDataSet dataSet) : base(dataSet) { }
 
-        public override List<Depot> CorrelateData()
+        public override List<CorrelateData> CorrelateData()
         {
-            // Depot Name, Country Name, Drug Type Name, Drug Unit Id and Pick Number.
-            // NOTE: Include all depots in the result, regardless of the association with other data 
             SystemDataSet dataSet = this.DataSet;
 
-            throw new NotImplementedException();
+            List<Depot> depots = dataSet.Depots;
+            List<DrugUnit> drugUnits = dataSet.DrugUnits;
+
+            List<CorrelateData> correlateData = new List<CorrelateData>();
+
+            foreach (Depot depot in depots)
+            {
+                foreach(DrugUnit drugUnit in drugUnits)
+                {
+                    if (drugUnit.Depot?.DepotId == depot.DepotId)
+                    {
+                        foreach(Country country in depot.Countries)
+                        {
+                            CorrelateData data = new CorrelateData
+                            {
+                                DepotName = depot.DepotName,
+                                CountryName = country.CountryName,
+                                DrugTypeName = drugUnit.DrugType?.DrugTypeName,
+                                DrugUnitId = drugUnit.DrugUnitId,
+                                PickNumber = drugUnit.PickNumber
+                            };
+
+                            correlateData.Add(data);
+                        }
+                    }
+                }
+            }
+            return correlateData;
         }
     }
 }

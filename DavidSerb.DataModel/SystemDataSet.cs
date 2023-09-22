@@ -52,6 +52,7 @@ namespace DavidSerb.DataModel
 
             // Set Relationships
             c1.Depot = d1;
+
             c2.Depot = d2;
 
             d1.Countries.Add(c1);
@@ -105,46 +106,5 @@ namespace DavidSerb.DataModel
             DrugTypes.Add(dt1);
             DrugTypes.Add(dt2);
         }
-
-        // ### Old AssociateDrugs
-        //public void associatedrugs(string depotid, int startpicknumber, int endpicknumber)
-        //{
-        //    depot depot = depots.firstordefault(dep => dep.depotid == depotid);
-        //    if (depot != null)
-        //    {
-        //        list<drugunit> drugunitstoassociate = drugunits
-        //            .where(drugunit => drugunit.picknumber >= startpicknumber && drugunit.picknumber <= endpicknumber)
-        //            .tolist();
-
-        //        if (drugunitstoassociate.count == 0) console.writeline($"there are no drugunits with the picknumber between ({startpicknumber}, {endpicknumber}).");
-        //        else
-        //        {
-        //            foreach (drugunit drugunit in drugunitstoassociate)
-        //            {
-        //                if (drugunit.depot != null) console.writeline($"drugunit {drugunit.drugunitid} is already associated to depot.");
-        //                else drugunit.depot = depot;
-        //            }
-        //        }
-        //    }
-        //    else console.writeline($"depot with id {depotid} not found.");
-        //}
-
-        // ### Old DisassociateDrugs
-        //public void DisassociateDrugs(int startPickNumber, int endPickNumber)
-        //{
-        //    List<DrugUnit> drugUnitsToDisassociate = DrugUnits
-        //        .Where(drugUnit => drugUnit.PickNumber >= startPickNumber && drugUnit.PickNumber <= endPickNumber)
-        //        .ToList();
-
-        //    if (drugUnitsToDisassociate.Count == 0) Console.WriteLine($"There are no DrugUnits with the PickNumber between ({startPickNumber}, {endPickNumber}).");
-        //    else
-        //    {
-        //        foreach (DrugUnit drugUnit in drugUnitsToDisassociate)
-        //        {
-        //            if (drugUnit.Depot != null) drugUnit.Depot = null;
-        //            else Console.WriteLine($"DrugUnit {drugUnit.DrugUnitId} is not associated with Depot.");
-        //        }
-        //    }
-        //}
     }
 }

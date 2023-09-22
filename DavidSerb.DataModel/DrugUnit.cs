@@ -24,8 +24,6 @@ namespace DavidSerb.DataModel
         {
             DrugUnitId = drugUnitId;
             PickNumber = pickNumber;
-            //DepotId = depotId; // ??? nu sunt sigur daca trebuie
-            //DrugTypeId = drugTypeId; // ??? nu sunt sigur daca trebuie
         }
     }
 }
