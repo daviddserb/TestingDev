@@ -1,4 +1,5 @@
 ﻿using DavidSerb.DataModel;
+using DavidSerb.DataModel.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

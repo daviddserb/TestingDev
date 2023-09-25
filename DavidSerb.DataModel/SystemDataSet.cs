@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DavidSerb.DataModel.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,9 @@ namespace DavidSerb.DataModel
 
             DrugType dt1 = new DrugType(1, "DrugType 1");
             DrugType dt2 = new DrugType(2, "DrugType 2");
+
+            Site s1 = new Site(1, "Site A", 1);
+            Site s2 = new Site(2, "Site B", 2);
 
             // Set Relationships
             c1.Depot = d1;

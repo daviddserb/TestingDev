@@ -43,10 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorrelateData.cs" />
-    <Compile Include="Country.cs" />
-    <Compile Include="Depot.cs" />
-    <Compile Include="DrugType.cs" />
-    <Compile Include="DrugUnit.cs" />
+    <Compile Include="Data\AppDbContext.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Depot.cs" />
+    <Compile Include="Models\DrugType.cs" />
+    <Compile Include="Models\DrugUnit.cs" />
+    <Compile Include="Models\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemDataSet.cs" />
   </ItemGroup>

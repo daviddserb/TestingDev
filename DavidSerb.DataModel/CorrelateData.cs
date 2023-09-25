@@ -17,6 +17,13 @@ namespace DavidSerb.DataModel
         public string DrugUnitId { get; set; }
         public int PickNumber { get; set; }
 
-        // TODO: sa fac constructor cu toate proprietatile
+        public CorrelateData(string depotName, string countryName, string drugTypeName, string drugUnitId, int pickNumber)
+        {
+            DepotName = depotName;
+            CountryName = countryName;
+            DrugTypeName = drugTypeName;
+            DrugUnitId = drugUnitId;
+            PickNumber = pickNumber;
+        }
     }
 }

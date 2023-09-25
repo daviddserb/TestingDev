@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DavidSerb.DataModel
+namespace DavidSerb.DataModel.Models
 {
     public class DrugUnit
     {

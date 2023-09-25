@@ -1,4 +1,5 @@
 ﻿using DavidSerb.DataModel;
+using DavidSerb.DataModel.Models;
 using DavidSerb.Domain;
 using DavidSerb.Domain.CorrelationService;
 using System;
@@ -78,7 +79,7 @@ namespace DavidSerb
 
             Console.WriteLine("\n DrugUnitDictionary:");
             //Dictionary<string, List<DrugUnit>> drugUnitsDict = DrugUnitsGroupedByType(); // Old
-            IList<DrugUnit> drugUnitsDictTest = new List<DrugUnit>();
+            IList<DrugUnit> drugUnitsDictTest = drugUnits;
             foreach (var kvp in drugUnitsDictTest.ToGroupedDrugUnits())
             {
                 Console.WriteLine($"Drug Type: {kvp.Key}");
