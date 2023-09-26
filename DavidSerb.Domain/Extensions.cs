@@ -16,9 +16,8 @@ namespace DavidSerb.Domain
         /// <returns>A dictionary of all DrugUnits grouped by their associated DrugTypeName</returns>
         public static Dictionary<string, List<DrugUnit>> ToGroupedDrugUnits(this IList<DrugUnit> drugUnits)
         {
-            // Old
+            // BEFORE:
             //Dictionary<string, List<DrugUnit>> drugUnitsDict = new Dictionary<string, List<DrugUnit>>();
-
             //foreach (DrugUnit drugUnit in drugUnits)
             //{
             //    string drugTypeName = drugUnit.DrugType?.DrugTypeName;
@@ -31,7 +30,7 @@ namespace DavidSerb.Domain
             //    }
             //}
 
-            // New
+            // AFTER:
             var drugUnitsDict = drugUnits
                 .Where(drugUnit => drugUnit.DrugType?.DrugTypeName != null)
                 .GroupBy(drugUnit => drugUnit.DrugType.DrugTypeName)

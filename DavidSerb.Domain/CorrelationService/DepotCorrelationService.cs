@@ -20,9 +20,8 @@ namespace DavidSerb.Domain.CorrelationService
             List<Depot> depots = dataSet.Depots;
             List<DrugUnit> drugUnits = dataSet.DrugUnits;
 
-            // Old
+            // BEFORE:
             //List<CorrelateData> correlateData = new List<CorrelateData>();
-
             //foreach (Depot depot in depots)
             //{
             //    foreach(DrugUnit drugUnit in drugUnits)
@@ -45,12 +44,11 @@ namespace DavidSerb.Domain.CorrelationService
 
             // Testing
             var x = depots.SelectMany(depot => depot.Countries);
-
             var a = depots.Select(depot => drugUnits.Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId));
             var b = depots.SelectMany(depot => drugUnits.Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId));
             var c = depots.SelectMany(depot => drugUnits.Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId).SelectMany(drugUnit => depot.Countries));
 
-            // New
+            // AFTER:
             var correlateData = depots
                 .SelectMany(depot => drugUnits
                     .Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId)

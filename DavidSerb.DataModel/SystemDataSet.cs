@@ -13,15 +13,16 @@ namespace DavidSerb.DataModel
         public List<Depot> Depots { get; } = new List<Depot>();
         public List<DrugUnit> DrugUnits { get; } = new List<DrugUnit>();
         public List<DrugType> DrugTypes { get; } = new List<DrugType>();
+        public List<Site> Sites { get; } = new List<Site>();
 
         public SystemDataSet()
         {
             // Set Values (declaration + initialization)
-            Country c1 = new Country(1, "Country A");
-            Country c2 = new Country(2, "Country B");
+            Country c1 = new Country(1, "CountryA");
+            Country c2 = new Country(2, "CountryB");
 
-            Depot d1 = new Depot("1", "Depot A");
-            Depot d2 = new Depot("2", "Depot B");
+            Depot d1 = new Depot("1", "DepotA");
+            Depot d2 = new Depot("2", "DepotB");
 
             //NOTE: Do not associate any of the drug units to a depot
             DrugUnit du1 = new DrugUnit("ABC111", 10);
@@ -48,16 +49,20 @@ namespace DavidSerb.DataModel
             DrugUnit du19 = new DrugUnit("DEV666", 280);
             DrugUnit du20 = new DrugUnit("DEV555", 290);
 
-            DrugType dt1 = new DrugType(1, "DrugType 1");
-            DrugType dt2 = new DrugType(2, "DrugType 2");
+            DrugType dt1 = new DrugType(1, "DrugType1");
+            DrugType dt2 = new DrugType(2, "DrugType2");
 
-            Site s1 = new Site(1, "Site A", 1);
-            Site s2 = new Site(2, "Site B", 2);
+            Site s1 = new Site("SiteId1", "SiteA", 1);
+            Site s2 = new Site("SiteId2", "SiteB", 1);
+            Site s3 = new Site("SiteId3", "SiteC", 2);
 
             // Set Relationships
             c1.Depot = d1;
+            c1.Sites.Add(s1);
+            c1.Sites.Add(s2);
 
             c2.Depot = d2;
+            c2.Sites.Add(s3);
 
             d1.Countries.Add(c1);
             d1.Countries.Add(c2);
@@ -78,6 +83,21 @@ namespace DavidSerb.DataModel
 
             du5.Depot = d2;
             du5.DrugType = dt1;
+
+            du6.Depot = d2;
+            du6.DrugType = dt1;
+
+            du7.Depot = d2;
+            du7.DrugType = dt1;
+
+            du8.Depot = d1;
+            du8.DrugType = dt2;
+
+            du9.Depot = d2;
+            du9.DrugType = dt2;
+
+            du10.Depot = d1;
+            du10.DrugType = dt2;
 
             //Add the objects to the properties
             Countries.Add(c1);
@@ -109,6 +129,10 @@ namespace DavidSerb.DataModel
 
             DrugTypes.Add(dt1);
             DrugTypes.Add(dt2);
+
+            Sites.Add(s1);
+            Sites.Add(s2);
+            Sites.Add(s3);
         }
     }
 }

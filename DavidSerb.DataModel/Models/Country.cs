@@ -17,10 +17,13 @@ namespace DavidSerb.DataModel.Models
         // navigation property
         public Depot Depot { get; set; }
 
+        public ICollection<Site> Sites { get; set; }
+
         public Country(int countryId, string countryName)
         {
             CountryId = countryId;
             CountryName = countryName;
+            Sites = new List<Site>();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace DavidSerb
         public static SystemDataSet DataSet = new SystemDataSet();
         public static DepotInventoryService depotInventoryService = new DepotInventoryService();
         public static DepotCorrelationService depotCorrelationService = new DepotCorrelationService(DataSet);
+        public static SiteDistributionService siteDistributionService = new SiteDistributionService();
 
         static void Main(string[] args)
         {
@@ -23,7 +24,7 @@ namespace DavidSerb
             Console.WriteLine("\nCountries:");
             foreach(Country country in DataSet.Countries)
             {
-                Console.WriteLine($"Country.ID '{country.CountryId}' - Country.Name '{country.CountryName}' - Depot.Id '{country.Depot.DepotId}'");
+                Console.WriteLine($"Country.ID '{country.CountryId}' - Country.Name '{country.CountryName}' - Depot.Id '{country.Depot.DepotId}' - Site.Id/s '{String.Join(", ", country.Sites.Select(site => site.SiteId))}'");
             }
 
             Console.WriteLine("\nDepots:");
@@ -49,7 +50,6 @@ namespace DavidSerb
             depotInventoryService.AssociateDrugs(ref drugUnits, "3", 60, 90); // depot not found
             depotInventoryService.AssociateDrugs(ref drugUnits, "1", 300, 400); // value interval not found
             depotInventoryService.AssociateDrugs(ref drugUnits, "1", 10, 50); // depot already associated
-            depotInventoryService.AssociateDrugs(ref drugUnits, "1", 60, 90);
             depotInventoryService.AssociateDrugs(ref drugUnits, "2", 220, 270);
 
             Console.WriteLine("\nDrugUnits After Associations:");
@@ -78,7 +78,6 @@ namespace DavidSerb
             }
 
             Console.WriteLine("\n DrugUnitDictionary:");
-            //Dictionary<string, List<DrugUnit>> drugUnitsDict = DrugUnitsGroupedByType(); // Old
             IList<DrugUnit> drugUnitsDictTest = drugUnits;
             foreach (var kvp in drugUnitsDictTest.ToGroupedDrugUnits())
             {
@@ -91,28 +90,18 @@ namespace DavidSerb
                 Console.WriteLine();
             }
 
+            Console.WriteLine("\nSiteDistributionService:");
+            siteDistributionService.GetRequestedDrugUnits("0", "DrugType1", 3); // siteId doesn't exist
+            siteDistributionService.GetRequestedDrugUnits("SiteId1", "Drug XILOF", 3); // drugCode doesn't exist
+            //siteDistributionService.GetRequestedDrugUnits("SiteId1", "DrugType1", 100); //quantity too big
+            var requestedDrugUnits = siteDistributionService.GetRequestedDrugUnits("SiteId1", "DrugType1", 3);
+            foreach (var requestedDrugUnit in requestedDrugUnits)
+            {
+                Console.WriteLine($"DrugUnit.Id '{requestedDrugUnit.DrugUnitId}' - DrugType.Name '{requestedDrugUnit.DrugType.DrugTypeName}' - Depot.Id '{requestedDrugUnit.Depot.DepotId}'.");
+            }
+
             Console.WriteLine("Stop.");
             Console.ReadKey(); // keep Console open
         }
-
-        // Old
-        //public static Dictionary<string, List<DrugUnit>> DrugUnitsGroupedByType()
-        //{
-        //    Dictionary<string, List<DrugUnit>> drugUnitsDict = new Dictionary<string, List<DrugUnit>>();
-
-        //    foreach (DrugUnit drugUnit in DataSet.DrugUnits)
-        //    {
-        //        string drugTypeName = drugUnit.DrugType?.DrugTypeName;
-
-        //        if (drugTypeName != null)
-        //        {
-        //            if (!drugUnitsDict.ContainsKey(drugTypeName)) drugUnitsDict[drugTypeName] = new List<DrugUnit>();
-
-        //            drugUnitsDict[drugTypeName].Add(drugUnit);
-        //        }
-        //    }
-
-        //    return drugUnitsDict;
-        //}
     }
 }

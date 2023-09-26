@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="CorrelationService\BaseCorrelationService.cs" />
     <Compile Include="CorrelationService\DepotCorrelationService.cs" />
+    <Compile Include="CustomExceptions\ClientException.cs" />
+    <Compile Include="CustomExceptions\CustomExceptionBase.cs" />
+    <Compile Include="CustomExceptions\NotFoundException.cs" />
     <Compile Include="DepotInventoryService.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="IDepotInventoryService.cs" />
@@ -55,6 +58,9 @@
       <Project>{7df33fb5-89d2-4d1b-914c-fe2a78bef637}</Project>
       <Name>DavidSerb.DataModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
