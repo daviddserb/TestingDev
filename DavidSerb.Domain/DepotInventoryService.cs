@@ -1,8 +1,11 @@
 ﻿using DavidSerb.DataModel;
+using DavidSerb.DataModel.Data;
 using DavidSerb.DataModel.Models;
+using DavidSerb.Domain.CustomExceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,46 +13,58 @@ namespace DavidSerb.Domain
 {
     public class DepotInventoryService : IDepotInventoryService
     {
-        SystemDataSet systemDataSet = new SystemDataSet();
+        AppDbContext dbContext = new AppDbContext();
 
-        public void AssociateDrugs(ref List<DrugUnit> drugUnits, string depotId, int startPickNumber, int endPickNumber)
+        /// <summary>
+        /// Associate Drugs To Depot
+        /// </summary>
+        /// <param name="drugUnits"></param>
+        /// <param name="depotId"></param>
+        /// <param name="startPickNumber"></param>
+        /// <param name="endPickNumber"></param>
+        public async void AssociateDrugs(List<DrugUnit> drugUnits, string depotId, int startPickNumber, int endPickNumber)
         {
-            Depot depot = systemDataSet.Depots.FirstOrDefault(dep => dep.DepotId == depotId);
+            Depot selectedDepot = dbContext.Depots.FirstOrDefault(depot => depot.DepotId == depotId);
+            if (selectedDepot == null) throw new NotFoundException($"Depot with id {depotId} not found.");
 
-            if (depot == null) Console.WriteLine($"Depot with id {depotId} not found.");
-            else
+            List<DrugUnit> drugUnitsToAssociate = drugUnits
+                .Where(drugUnit => drugUnit.PickNumber >= startPickNumber && drugUnit.PickNumber <= endPickNumber)
+                .ToList();
+            if (drugUnitsToAssociate.Count == 0) throw new NotFoundException($"There are no DrugUnits with the PickNumber between [{startPickNumber}, {endPickNumber}].");
+            
+            foreach (DrugUnit drugUnit in drugUnitsToAssociate)
             {
-                List<DrugUnit> drugUnitsToAssociate = drugUnits
-                    .Where(drugUnit => drugUnit.PickNumber >= startPickNumber && drugUnit.PickNumber <= endPickNumber)
-                    .ToList();
-
-                if (drugUnitsToAssociate.Count == 0) Console.WriteLine($"There are no DrugUnits with the PickNumber between [{startPickNumber}, {endPickNumber}].");
-                else
-                {
-                    foreach (DrugUnit drugUnit in drugUnitsToAssociate)
-                    {
-                        if (drugUnit.Depot != null) Console.WriteLine($"DrugUnit with id {drugUnit.DrugUnitId} is already associated to a Depot with id {drugUnit.Depot.DepotId}.");
-                        else drugUnit.Depot = depot;
-                    }
-                }
+                if (drugUnit.DepotId != null) throw new ClientException($"DrugUnit with id {drugUnit.DrugUnitId} is already associated to a Depot with id {drugUnit.DepotId}.");
+                
+                drugUnit.DepotId = selectedDepot.DepotId;
+                // Mark the entity (drugUnit) as changed => EFC knows to don't create a new one but to update the existing one
+                dbContext.Entry(drugUnit).State = EntityState.Modified;
             }
+            dbContext.SaveChanges();
         }
 
-        public void DisassociateDrugs(ref List<DrugUnit> drugUnits, int startPickNumber, int endPickNumber)
+        /// <summary>
+        /// Disassociate Drugs From Depot
+        /// </summary>
+        /// <param name="drugUnits"></param>
+        /// <param name="startPickNumber"></param>
+        /// <param name="endPickNumber"></param>
+        public async void DisassociateDrugs(List<DrugUnit> drugUnits, int startPickNumber, int endPickNumber)
         {
             List<DrugUnit> drugUnitsToDisassociate = drugUnits
                 .Where(drugUnit => drugUnit.PickNumber >= startPickNumber && drugUnit.PickNumber <= endPickNumber)
                 .ToList();
+            if (drugUnitsToDisassociate.Count == 0) throw new NotFoundException($"There are no DrugUnits with the PickNumber between [{startPickNumber}, {endPickNumber}].");
 
-            if (drugUnitsToDisassociate.Count == 0) Console.WriteLine($"There are no DrugUnits with the PickNumber between [{startPickNumber}, {endPickNumber}].");
-            else
+            foreach (DrugUnit drugUnit in drugUnitsToDisassociate)
             {
-                foreach (DrugUnit drugUnit in drugUnitsToDisassociate)
-                {
-                    if (drugUnit.Depot == null) Console.WriteLine($"DrugUnit with id {drugUnit.DrugUnitId} is not associated with a Depot.");
-                    else drugUnit.Depot = null;
-                }
+                if (drugUnit.DepotId == null) throw new ClientException($"DrugUnit with id {drugUnit.DrugUnitId} is not associated with a Depot.");
+                
+                drugUnit.DepotId = null;
+                // Mark the entity (drugUnit) as changed => EFC knows to don't create a new one but to update the existing one
+                dbContext.Entry(drugUnit).State = EntityState.Modified;
             }
+            dbContext.SaveChanges();
         }
     }
 }

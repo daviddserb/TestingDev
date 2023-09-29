@@ -13,12 +13,16 @@ namespace DavidSerb.DataModel.Models
         public int PickNumber { get; set; }
 
         [ForeignKey("Depot")]
-        public int DepotId { get; set; }
+        public string DepotId { get; set; }
         public Depot Depot { get; set; }
 
         [ForeignKey("DrugType")]
-        public int DrugTypeId { get; set; }
+        public string DrugTypeId { get; set; }
         public DrugType DrugType { get; set; }
+
+        [ForeignKey("Site")]
+        public string SiteId { get; set; }
+        public Site Site { get; set; }
 
         public DrugUnit(string drugUnitId, int pickNumber)
         {

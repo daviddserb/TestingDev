@@ -9,17 +9,17 @@ namespace DavidSerb.DataModel.Models
 {
     public class Country
     {
-        public int CountryId { get; set; }
+        public string CountryId { get; set; }
         public string CountryName { get; set; }
 
         [ForeignKey("Depot")]
-        public int DepotId { get; set; }
+        public string DepotId { get; set; }
         // navigation property
         public Depot Depot { get; set; }
 
         public ICollection<Site> Sites { get; set; }
 
-        public Country(int countryId, string countryName)
+        public Country(string countryId, string countryName)
         {
             CountryId = countryId;
             CountryName = countryName;

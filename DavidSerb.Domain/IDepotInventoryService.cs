@@ -9,8 +9,8 @@ namespace DavidSerb.Domain
 {
     interface IDepotInventoryService
     {
-        void AssociateDrugs(ref List<DrugUnit> drugUnits, string depotId, int startPickNumber, int endPickNumber);
+        void AssociateDrugs(List<DrugUnit> drugUnits, string depotId, int startPickNumber, int endPickNumber);
 
-        void DisassociateDrugs(ref List<DrugUnit> drugUnits, int startPickNumber, int endPickNumber);
+        void DisassociateDrugs(List<DrugUnit> drugUnits, int startPickNumber, int endPickNumber);
     }
 }

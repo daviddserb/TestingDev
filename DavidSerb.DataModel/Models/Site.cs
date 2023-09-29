@@ -13,11 +13,11 @@ namespace DavidSerb.DataModel.Models
         public string SiteName { get; set; }
 
         [ForeignKey("Country")]
-        // !!! Daca la mutarea claselor in tabele, se face shadow key, atunci fac rename la CountryCode in CountryId
-        public int CountryCode { get; set; }
+        [Column("CountryCode")]
+        public string CountryCode { get; set; }
         public Country Country { get; set; }
 
-        public Site(string siteId, string siteName, int countryCode)
+        public Site(string siteId, string siteName, string countryCode)
         {
             SiteId = siteId;
             SiteName = siteName;

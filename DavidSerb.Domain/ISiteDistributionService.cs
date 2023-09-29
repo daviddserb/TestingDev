@@ -9,6 +9,6 @@ namespace DavidSerb.Domain
 {
     interface ISiteDistributionService
     {
-        IEnumerable<DrugUnit> GetRequestedDrugUnits(string siteId, string drugCode, int quantity);
+        Task<List<DrugUnit>> GetRequestedDrugUnits(string siteId, string drugCode, int quantity);
     }
 }
