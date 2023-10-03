@@ -1,0 +1,24 @@
+﻿@model DavidSerb.Web.Models.Site
+@{
+    Layout = null;
+}
+
+<h1>Edit Site</h1>
+
+<fieldset>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(site => site.SiteId)
+        <p>
+            @Html.LabelFor(site => site.SiteName)
+            @Html.EditorFor(site => site.SiteName)
+            @Html.ValidationMessageFor(site => site.SiteName, "", new { style = "color: red" })
+        </p>
+        <p>
+            @Html.LabelFor(site => site.CountryCode)
+            @Html.EditorFor(site => site.CountryCode)
+            @Html.ValidationMessageFor(site => site.CountryCode)
+        </p>
+        <button class="btn btn-primary" type="submit">Save</button>
+    }
+</fieldset>

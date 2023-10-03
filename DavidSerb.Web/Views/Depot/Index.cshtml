@@ -1,0 +1,41 @@
+﻿@model List<DavidSerb.Web.Models.Depot>
+
+<h1>Depots</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Countries</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var depot in Model)
+        {
+            <tr>
+                <td>@depot.DepotId</td>
+                <td>@depot.DepotName</td>
+                <td>
+                    @if (!depot.Countries.Any())
+                    {
+                        <p>No Countries attached</p>
+                    }
+                    else
+                    {
+                        <p>@string.Join(", ", depot.Countries.Select(country => country.CountryName))</p>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Edit", new { id = depot.DepotId })">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", new { id = depot.DepotId })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create")">Create new</a>
+</p>

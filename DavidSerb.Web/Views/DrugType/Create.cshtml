@@ -1,0 +1,24 @@
+﻿@model DavidSerb.Web.Models.DrugType
+
+@{
+    Layout = null;
+}
+
+<h1>Create DrugType</h1>
+
+<fieldset>
+    @using (Html.BeginForm())
+    {
+        <p>
+            @Html.LabelFor(drugType => drugType.DrugTypeId)
+            @Html.EditorFor(drugType => drugType.DrugTypeId)
+            @Html.ValidationMessageFor(drugType => drugType.DrugTypeId, "", new { style = "color: red" });
+        </p>
+        <p>
+            @Html.LabelFor(drugType => drugType.DrugTypeName)
+            @Html.TextBoxFor(drugType => drugType.DrugTypeName)
+            @Html.ValidationMessageFor(drugType => drugType.DrugTypeName, "", new { style = "color: red" });
+        </p>
+        <button class="btn btn-primary" type="submit">Create</button>
+    }
+</fieldset>

@@ -13,16 +13,17 @@
         <p>
             @Html.LabelFor(country => country.CountryId)
             @Html.EditorFor(country => country.CountryId)
-            @Html.ValidationMessageFor(country => country.CountryId);
+            @Html.ValidationMessageFor(country => country.CountryId, "", new { style = "color: red" });
         </p>
         <p>
             @Html.LabelFor(country => country.CountryName)
             @Html.TextBoxFor(country => country.CountryName)
-            @Html.ValidationMessageFor(country => country.CountryName);
+            @Html.ValidationMessageFor(country => country.CountryName, "", new { style = "color: red"});
         </p>
         <button class="btn btn-primary" type="submit">Create</button>
      }
 
+    @*TODO: sa incerc sa implementez form-ul folosind tag helpers in loc de html helpers*@
     @*<form asp-controller="Country" asp-action="Create">
         <p>
             <label asp-for="CountryId"></label>

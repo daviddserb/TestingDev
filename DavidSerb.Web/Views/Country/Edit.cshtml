@@ -12,7 +12,7 @@
         <p>
             @Html.LabelFor(country => country.CountryName)
             @Html.EditorFor(country => country.CountryName)
-            @Html.ValidationMessageFor(country => country.CountryName)
+            @Html.ValidationMessageFor(country => country.CountryName, "", new { style = "color: red" })
         </p>
         <p>
             @Html.LabelFor(country => country.DepotId)

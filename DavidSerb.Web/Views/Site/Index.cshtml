@@ -1,0 +1,41 @@
+﻿@model List<DavidSerb.Web.Models.Site>
+
+<h1>Sites</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var site in Model)
+        {
+            <tr>
+                <td>@site.SiteId</td>
+                <td>@site.SiteName</td>
+                <td>
+                    @if (site.Country == null)
+                    {
+                        <p>No Country attached</p>
+                    }
+                    else
+                    {
+                        <p>@site.Country.CountryName</p>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Edit", new { id = site.SiteId })">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", new { id = site.SiteId })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create")">Create new</a>
+</p>

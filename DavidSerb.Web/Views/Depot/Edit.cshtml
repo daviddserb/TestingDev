@@ -1,0 +1,19 @@
+﻿@model DavidSerb.Web.Models.Depot
+@{
+    Layout = null;
+}
+
+<h1>Edit Depot</h1>
+
+<fieldset>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(depot => depot.DepotId)
+        <p>
+            @Html.LabelFor(depot => depot.DepotName)
+            @Html.EditorFor(depot => depot.DepotName)
+            @Html.ValidationMessageFor(depot => depot.DepotName, "", new { style = "color: red" })
+        </p>
+        <button class="btn btn-primary" type="submit">Save</button>
+    }
+</fieldset>

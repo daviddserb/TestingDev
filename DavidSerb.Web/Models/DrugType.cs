@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,7 +8,11 @@ namespace DavidSerb.Web.Models
 {
     public class DrugType
     {
+        [Required]
         public string DrugTypeId { get; set; }
+        [Required]
+        [DataType(DataType.Text)]
+        [MinLength(5, ErrorMessage = "DrugType Name must be at least {1} characters.")]
         public string DrugTypeName { get; set; }
 
         /// <summary>

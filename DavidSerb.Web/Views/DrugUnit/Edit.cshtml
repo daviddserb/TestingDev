@@ -1,0 +1,27 @@
+﻿@model DavidSerb.Web.Models.DrugUnit
+@{
+    Layout = null;
+}
+
+<h1>Edit DrugUnit</h1>
+
+<fieldset>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(drugUnit => drugUnit.DrugUnitId)
+        <p>
+            @Html.LabelFor(drugUnit => drugUnit.PickNumber)
+            @Html.EditorFor(drugUnit => drugUnit.PickNumber)
+            @Html.ValidationMessageFor(drugUnit => drugUnit.PickNumber, "", new { style = "color: red" })
+        </p>
+        <p>
+            @Html.LabelFor(drugUnit => drugUnit.DepotId)
+            @Html.EditorFor(drugUnit => drugUnit.DepotId)
+        </p>
+        <p>
+            @Html.LabelFor(drugUnit => drugUnit.DrugTypeId)
+            @Html.EditorFor(drugUnit => drugUnit.DrugTypeId)
+        </p>
+        <button class="btn btn-primary" type="submit">Save</button>
+    }
+</fieldset>

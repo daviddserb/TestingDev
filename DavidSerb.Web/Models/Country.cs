@@ -9,6 +9,7 @@ namespace DavidSerb.Web.Models
 {
     public class Country
     {
+        [Required]
         public string CountryId { get; set; }
 
         [Required]

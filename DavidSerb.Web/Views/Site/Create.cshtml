@@ -1,0 +1,24 @@
+﻿@model DavidSerb.Web.Models.Site
+
+@{
+    Layout = null;
+}
+
+<h1>Create Site</h1>
+
+<fieldset>
+    @using (Html.BeginForm())
+    {
+        <p>
+            @Html.LabelFor(site => site.SiteId)
+            @Html.EditorFor(site => site.SiteId)
+            @Html.ValidationMessageFor(site => site.SiteId, "", new { style = "color: red" });
+        </p>
+        <p>
+            @Html.LabelFor(site => site.SiteName)
+            @Html.TextBoxFor(site => site.SiteName)
+            @Html.ValidationMessageFor(site => site.SiteName, "", new { style = "color: red" });
+        </p>
+        <button class="btn btn-primary" type="submit">Create</button>
+    }
+</fieldset>

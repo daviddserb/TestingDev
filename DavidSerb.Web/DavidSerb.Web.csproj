@@ -246,7 +246,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\DepotController.cs" />
+    <Compile Include="Controllers\DrugTypeController.cs" />
+    <Compile Include="Controllers\DrugUnitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -295,6 +299,18 @@
     <Content Include="Views\Country\Index.cshtml" />
     <Content Include="Views\Country\Create.cshtml" />
     <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\Depot\Create.cshtml" />
+    <Content Include="Views\Depot\Edit.cshtml" />
+    <Content Include="Views\Depot\Index.cshtml" />
+    <Content Include="Views\DrugType\Create.cshtml" />
+    <Content Include="Views\DrugType\Edit.cshtml" />
+    <Content Include="Views\DrugType\Index.cshtml" />
+    <Content Include="Views\DrugUnit\Create.cshtml" />
+    <Content Include="Views\DrugUnit\Edit.cshtml" />
+    <Content Include="Views\DrugUnit\Index.cshtml" />
+    <Content Include="Views\Site\Create.cshtml" />
+    <Content Include="Views\Site\Edit.cshtml" />
+    <Content Include="Views\Site\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
