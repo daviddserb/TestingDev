@@ -14,8 +14,7 @@ namespace DavidSerb.DataModel.Models
 
         [ForeignKey("Depot")]
         public string DepotId { get; set; }
-        // navigation property
-        public Depot Depot { get; set; }
+        public Depot Depot { get; set; } // navigation property
 
         public ICollection<Site> Sites { get; set; }
 

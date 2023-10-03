@@ -1,0 +1,24 @@
+﻿@model DavidSerb.Web.Models.Country
+@{
+    Layout = null;
+}
+
+<h1>Edit Country</h1>
+
+<fieldset>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(country => country.CountryId)
+        <p>
+            @Html.LabelFor(country => country.CountryName)
+            @Html.EditorFor(country => country.CountryName)
+            @Html.ValidationMessageFor(country => country.CountryName)
+        </p>
+        <p>
+            @Html.LabelFor(country => country.DepotId)
+            @Html.EditorFor(country => country.DepotId)
+            @Html.ValidationMessageFor(country => country.DepotId)
+        </p>
+        <button class="btn btn-primary" type="submit">Save</button>
+    }
+</fieldset>

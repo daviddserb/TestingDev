@@ -13,8 +13,6 @@ namespace DavidSerb.DataModel.Models
 
         public ICollection<Country> Countries { get; set; }
 
-        //public DrugUnit DrugUnit { get; set; }
-
         public Depot(string depotId, string depotName)
         {
             DepotId = depotId;

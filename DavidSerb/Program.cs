@@ -28,7 +28,6 @@ namespace DavidSerb
             Console.WriteLine("Start:");
 
             Console.WriteLine("\nCountries:");
-            // BEFORE (from In-Memory):
             foreach (Country country in DataSet.Countries)
             {
                 Console.WriteLine($"Country.ID '{country.CountryId}' - Country.Name '{country.CountryName}' - Depot.Id '{country.Depot.DepotId}' - Site.Id/s '{String.Join(", ", country.Sites.Select(site => site.SiteId))}'");
@@ -41,7 +40,7 @@ namespace DavidSerb
             }
 
             Console.WriteLine("\nDrugUnits:");
-            var drugUnits = DataSet.DrugUnits;
+            List<DrugUnit> drugUnits = DataSet.DrugUnits;
             foreach (DrugUnit drugUnit in drugUnits)
             {
                 Console.WriteLine($"DrugUnit.ID '{drugUnit.DrugUnitId}' - DrugUnit.PickNumber '{drugUnit.PickNumber}' - Depot.Name: {drugUnit.Depot?.DepotName}");
@@ -53,7 +52,7 @@ namespace DavidSerb
                 Console.WriteLine($"DrugType.ID '{drugType.DrugTypeId}' - DrugType.Name '{drugType.DrugTypeName}'");
             }
 
-            Console.WriteLine("\nDepotCorrelationService - CorrelateData():");
+            Console.WriteLine("\nCorrelate Data:");
             List<CorrelateData> correlateData = depotCorrelationService.CorrelateData();
             int count = 0;
             foreach (CorrelateData cData in correlateData)

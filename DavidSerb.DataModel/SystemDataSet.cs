@@ -78,7 +78,6 @@ namespace DavidSerb.DataModel
             drugUnit3.DrugType = drugType2;
 
             drugUnit4.Depot = depot1;
-            drugUnit4.DrugType = drugType2;
 
             drugUnit5.Depot = depot2;
             drugUnit5.DrugType = drugType1;
@@ -86,7 +85,6 @@ namespace DavidSerb.DataModel
             drugUnit6.Depot = depot2;
             drugUnit6.DrugType = drugType1;
 
-            drugUnit7.Depot = depot2;
             drugUnit7.DrugType = drugType1;
 
             drugUnit8.Depot = depot1;

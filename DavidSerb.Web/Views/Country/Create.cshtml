@@ -1,0 +1,41 @@
+﻿@*@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"*@
+@model DavidSerb.Web.Models.Country
+
+@{
+    Layout = null;
+}
+
+<h1>Create Country</h1>
+
+<fieldset>
+    @using (Html.BeginForm())
+     {
+        <p>
+            @Html.LabelFor(country => country.CountryId)
+            @Html.EditorFor(country => country.CountryId)
+            @Html.ValidationMessageFor(country => country.CountryId);
+        </p>
+        <p>
+            @Html.LabelFor(country => country.CountryName)
+            @Html.TextBoxFor(country => country.CountryName)
+            @Html.ValidationMessageFor(country => country.CountryName);
+        </p>
+        <button class="btn btn-primary" type="submit">Create</button>
+     }
+
+    @*<form asp-controller="Country" asp-action="Create">
+        <p>
+            <label asp-for="CountryId"></label>
+            <input asp-for="CountryId" class="form-control" placeholder="Country Id">
+            <span asp-validation-for="CountryId"></span>
+        </p>
+        <p>
+            <label asp-for="CountryName"></label>
+            <input asp-for="CountryName" class="form-control" placeholder="Country Name">
+            <span asp-validation-for="CountryName"></span>
+        </p>
+        <p>
+            <button type="submit">Create Country</button>
+        </p>
+    </form>*@
+</fieldset>
