@@ -1,5 +1,6 @@
 ﻿
 using DavidSerb.DataModel;
+using DavidSerb.DataModel.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,18 @@ namespace DavidSerb.Domain.CorrelationService
 {
     public abstract class BaseCorrelationService<T>
     {
-        protected readonly SystemDataSet DataSet;
+        // BEFORE:
+        //protected readonly SystemDataSet DataSet;
 
-        protected BaseCorrelationService(SystemDataSet dataSet)
+        //protected BaseCorrelationService(SystemDataSet dataSet)
+        //{
+        //    this.DataSet = dataSet;
+        //}
+        // AFTER:
+        protected readonly AppDbContext DbContext;
+        protected BaseCorrelationService(AppDbContext dbContext)
         {
-            this.DataSet = dataSet;
+            DbContext = dbContext;
         }
 
         public abstract T CorrelateData();

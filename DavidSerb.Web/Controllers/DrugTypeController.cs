@@ -1,4 +1,6 @@
-﻿using DavidSerb.Web.Models;
+﻿using DavidSerb.DataModel.Data;
+using DavidSerb.DataModel.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +10,9 @@ using System.Web.Mvc;
 
 namespace DavidSerb.Web.Controllers
 {
-    [Route("drug-type")]
     public class DrugTypeController : Controller
     {
-        public static AppDataContext dbContext = new AppDataContext();
+        public static AppDbContext dbContext = new AppDbContext();
 
         [Route("")]
         public ActionResult Index()
@@ -57,6 +58,7 @@ namespace DavidSerb.Web.Controllers
             if (existingDrugType == null) return HttpNotFound();
 
             existingDrugType.DrugTypeName = editedDrugType.DrugTypeName;
+            existingDrugType.WeightInPounds = editedDrugType.WeightInPounds;
             dbContext.SaveChanges();
 
             return Redirect("../Index");
@@ -71,6 +73,30 @@ namespace DavidSerb.Web.Controllers
             dbContext.SaveChanges();
 
             return Redirect("../Index");
+        }
+
+        public ActionResult DisplayWeight()
+        {
+            List<Depot> depots = dbContext.Depots
+                .ToList();
+
+            List<DrugUnit> drugUnits = dbContext.DrugUnits
+                .Include(drugUnit => drugUnit.Depot)
+                .Include(drugUnit => drugUnit.DrugType)
+                .ToList();
+
+            const decimal poundsToKg = 2.2m;
+            List<DepotWeightViewModel> depotsWithWeights = depots
+                .Select(depot => new DepotWeightViewModel
+                {
+                    DepotName = depot.DepotName,
+                    TotalWeight = drugUnits
+                        .Where(drugUnit => drugUnit.DepotId == depot.DepotId && drugUnit.DrugType != null)
+                        .Sum(drugUnit => Math.Round((drugUnit.DrugType.WeightInPounds / poundsToKg), 3))
+                })
+                .ToList();
+
+            return View(depotsWithWeights);
         }
     }
 }

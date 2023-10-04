@@ -1,4 +1,4 @@
-﻿@model List<DavidSerb.Web.Models.Site>
+﻿@model List<DavidSerb.DataModel.Models.Site>
 
 <h1>Sites</h1>
 
@@ -30,9 +30,13 @@
                 <td>
                     <a class="btn btn-primary" href="@Url.Action("Edit", new { id = site.SiteId })">Edit</a>
                     <a class="btn btn-danger" href="@Url.Action("Delete", new { id = site.SiteId })">Delete</a>
-                </td>
-            </tr>
-        }
+                    @if (@site.Country != null)
+                    {
+                        <a class="btn btn-info" href="@Url.Action("RequestDrugs", new { id = site.SiteId })">Request Drugs</a>
+                    }
+    </td>
+    </tr>
+    }
     </tbody>
 </table>
 

@@ -1,4 +1,6 @@
-﻿using DavidSerb.Web.Models;
+﻿using DavidSerb.DataModel.Data;
+using DavidSerb.DataModel.Models;
+using DavidSerb.Domain.CustomExceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,10 +11,9 @@ using System.Web.Mvc;
 
 namespace DavidSerb.Web.Controllers
 {
-    [Route("site")]
     public class SiteController : Controller
     {
-        public static AppDataContext dbContext = new AppDataContext();
+        public static AppDbContext dbContext = new AppDbContext();
 
         [Route("")]
         public ActionResult Index()
@@ -75,6 +76,42 @@ namespace DavidSerb.Web.Controllers
             dbContext.SaveChanges();
 
             return Redirect("../Index");
+        }
+
+        [HttpGet]
+        public ActionResult RequestDrugs(string id)
+        {
+            Site selectedSite = dbContext.Sites
+                .Include(site => site.Country)
+                .FirstOrDefault(site => site.SiteId == id);
+            if (selectedSite == null) throw new NotFoundException($"Site with id {id} not found.");
+
+            List<DrugUnit> siteDrugUnits = dbContext.DrugUnits
+                .Where(drugUnit => drugUnit.DepotId == selectedSite.Country.DepotId)
+                .ToList();
+
+            // ??? Maybe can be improved - instead of using ViewBag for SiteId, we can create a ViewModel with 2 props: List<DrugUnit> DrugUnits and string SiteId and return the obj of the VM.
+            ViewBag.SiteId = id;
+
+            return View(siteDrugUnits);
+        }
+
+        public ActionResult MoveDrugsToSite(string drugUnitId, string siteId)
+        {
+            DrugUnit selectedDrugUnit = dbContext.DrugUnits.FirstOrDefault(drugUnit => drugUnit.DrugUnitId == drugUnitId);
+            if (selectedDrugUnit == null) throw new NotFoundException($"DrugUnit with id {drugUnitId} not found.");
+
+            Site selectedSite = dbContext.Sites.FirstOrDefault(site => site.SiteId == siteId);
+            if (selectedSite == null) throw new NotFoundException($"Site with id {siteId} not found.");
+
+            selectedDrugUnit.DepotId = null;
+            selectedDrugUnit.SiteId = selectedSite.SiteId;
+
+            // Mark the entity (drugUnit) as changed => EFC knows to don't create a new one but to update the existing one
+            dbContext.Entry(selectedDrugUnit).State = EntityState.Modified;
+            dbContext.SaveChanges();
+
+            return RedirectToAction("Index", "DrugUnit");
         }
     }
 }

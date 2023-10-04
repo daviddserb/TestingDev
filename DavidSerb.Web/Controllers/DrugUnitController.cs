@@ -1,4 +1,6 @@
-﻿using DavidSerb.Web.Models;
+﻿using DavidSerb.DataModel.Data;
+using DavidSerb.DataModel.Models;
+using DavidSerb.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,10 +11,9 @@ using System.Web.Mvc;
 
 namespace DavidSerb.Web.Controllers
 {
-    [Route("drug-unit")]
     public class DrugUnitController : Controller
     {
-        public static AppDataContext dbContext = new AppDataContext();
+        public static AppDbContext dbContext = new AppDbContext();
 
         [Route("")]
         public ActionResult Index()
@@ -24,6 +25,20 @@ namespace DavidSerb.Web.Controllers
                 .ToList();
 
             return View(drugUnits);
+        }
+
+        [HttpGet]
+        public ActionResult GroupedDrugUnits()
+        {
+            IList<DrugUnit> drugUnits = dbContext.DrugUnits
+                .Include(drugUnit => drugUnit.DrugType)
+                .ToList();
+
+            Dictionary<string, List<DrugUnit>> drugUnitsDict = drugUnits.ToGroupedDrugUnits();
+
+            GroupedDrugUnitsViewModel groupedDrugUnitsVM = new GroupedDrugUnitsViewModel { DrugUnitsDict = drugUnitsDict };
+
+            return View(groupedDrugUnitsVM);
         }
 
         [HttpGet, Route("create")]

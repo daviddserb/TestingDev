@@ -1,0 +1,27 @@
+﻿@model List<DavidSerb.DataModel.Models.DrugUnit>
+
+<h1>Available Drugs for the selected Site</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>DrugUnit</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var drugUnit in Model)
+        {
+            <tr>
+                <td>@drugUnit.DrugUnitId</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("MoveDrugsToSite", new { drugUnitId = drugUnit.DrugUnitId, siteId = ViewBag.SiteId })">Move to Site</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create")">Create new</a>
+</p>

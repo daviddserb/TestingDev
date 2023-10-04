@@ -1,4 +1,4 @@
-﻿@model List<DavidSerb.Web.Models.DrugType>
+﻿@model List<DavidSerb.DataModel.Models.DrugType>
 
 <h1>DrugTypes</h1>
 
@@ -7,24 +7,27 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Weight</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var drugType in Model)
         {
-        <tr>
-            <td>@drugType.DrugTypeId</td>
-            <td>@drugType.DrugTypeName</td>
-            <td>
-                <a class="btn btn-primary" href="@Url.Action("Edit", new { id = drugType.DrugTypeId })">Edit</a>
-                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = drugType.DrugTypeId })">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>@drugType.DrugTypeId</td>
+                <td>@drugType.DrugTypeName</td>
+                <td>@drugType.WeightInPounds</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Edit", new { id = drugType.DrugTypeId })">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", new { id = drugType.DrugTypeId })">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
 
 <p>
     <a class="btn btn-primary" href="@Url.Action("Create")">Create new</a>
+    <a class="btn btn-primary" href="@Url.Action("DisplayWeight")">Check Total Weights</a>
 </p>

@@ -1,0 +1,28 @@
+﻿@model DavidSerb.DataModel.Models.GroupedDrugUnitsViewModel
+
+<h1>Grouped Drug Units</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>DrugType</th>
+            <th>DrugUnits - PickNumber</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kvp in Model.DrugUnitsDict)
+        {
+            <tr>
+                <td>@kvp.Key</td>
+                <td>
+                    <ul>
+                        @foreach (var drugUnit in kvp.Value)
+                        {
+                            <li>@drugUnit.DrugUnitId - @drugUnit.PickNumber</li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

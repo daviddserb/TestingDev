@@ -1,0 +1,21 @@
+﻿@model List<DavidSerb.DataModel.Models.DepotWeightViewModel>
+
+<h1>Depots with Weights</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Depot</th>
+            <th>Weight</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DepotName</td>
+                <td>@item.TotalWeight KG</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -254,12 +254,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AppDataContext.cs" />
-    <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\Depot.cs" />
-    <Compile Include="Models\DrugType.cs" />
-    <Compile Include="Models\DrugUnit.cs" />
-    <Compile Include="Models\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -311,6 +305,10 @@
     <Content Include="Views\Site\Create.cshtml" />
     <Content Include="Views\Site\Edit.cshtml" />
     <Content Include="Views\Site\Index.cshtml" />
+    <Content Include="Views\Depot\DepotUnits.cshtml" />
+    <Content Include="Views\DrugUnit\GroupedDrugUnits.cshtml" />
+    <Content Include="Views\Site\RequestDrugs.cshtml" />
+    <Content Include="Views\DrugType\DisplayWeight.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -327,6 +325,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DavidSerb.DataModel\DavidSerb.DataModel.csproj">
+      <Project>{7df33fb5-89d2-4d1b-914c-fe2a78bef637}</Project>
+      <Name>DavidSerb.DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DavidSerb.Domain\DavidSerb.Domain.csproj">
+      <Project>{7a1fdf05-1edd-4249-9b53-c8a58618c556}</Project>
+      <Name>DavidSerb.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

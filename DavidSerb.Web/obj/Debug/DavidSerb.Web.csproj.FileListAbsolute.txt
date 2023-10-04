@@ -165,3 +165,9 @@ C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\bin\ru\Microsoft.Data.SqlCli
 C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\bin\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\bin\zh-Hant\Microsoft.Data.SqlClient.resources.dll
 C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\obj\Debug\DavidSerb.Web.csproj.AssemblyReference.cache
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\bin\DavidSerb.DataModel.dll
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\bin\DavidSerb.Domain.dll
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\bin\DavidSerb.DataModel.pdb
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\bin\DavidSerb.DataModel.dll.config
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\bin\DavidSerb.Domain.pdb
+C:\Users\dserb\source\repos\DavidSerb\DavidSerb.Web\bin\DavidSerb.Domain.dll.config

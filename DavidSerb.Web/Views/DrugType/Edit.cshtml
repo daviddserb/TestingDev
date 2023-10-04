@@ -1,4 +1,4 @@
-﻿@model DavidSerb.Web.Models.DrugType
+﻿@model DavidSerb.DataModel.Models.DrugType
 @{
     Layout = null;
 }
@@ -13,6 +13,11 @@
             @Html.LabelFor(drugType => drugType.DrugTypeName)
             @Html.EditorFor(drugType => drugType.DrugTypeName)
             @Html.ValidationMessageFor(drugType => drugType.DrugTypeName, "", new { style = "color: red" })
+        </p>
+        <p>
+            @Html.LabelFor(drugType => drugType.WeightInPounds)
+            @Html.EditorFor(drugType => drugType.WeightInPounds)
+            @Html.ValidationMessageFor(drugType => drugType.WeightInPounds, "", new { style = "color: red" })
         </p>
         <button class="btn btn-primary" type="submit">Save</button>
     }

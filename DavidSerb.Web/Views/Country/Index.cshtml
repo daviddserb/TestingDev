@@ -1,4 +1,4 @@
-﻿@model List<DavidSerb.Web.Models.Country>
+﻿@model List<DavidSerb.DataModel.Models.Country>
 
 <h1>Countries</h1>
 
@@ -15,34 +15,34 @@
     <tbody>
         @foreach (var country in Model)
         {
-        <tr>
-            <td>@country.CountryId</td>
-            <td>@country.CountryName</td>
-            <td>
-                @if (country.Depot == null)
-                {
-                    <p>No Depot attached</p>
-                }
-                else
-                {
-                    <p>@country.Depot.DepotName</p>
-                }
-            </td>
-            <td>
-                @if (!country.Sites.Any())
-                {
-                    <p>No Site attached</p>
-                }
-                else
-                {
-                    <p>@string.Join(", ", country.Sites.Select(site => site.SiteId))</p>
-                }
-            </td>
-            <td>
-                <a class="btn btn-primary" href="@Url.Action("Edit", new { id = country.CountryId })">Edit</a>
-                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = country.CountryId })">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>@country.CountryId</td>
+                <td>@country.CountryName</td>
+                <td>
+                    @if (country.Depot == null)
+                    {
+                        <p>No Depot attached</p>
+                    }
+                    else
+                    {
+                        <p>@country.Depot.DepotName</p>
+                    }
+                </td>
+                <td>
+                    @if (!country.Sites.Any())
+                    {
+                        <p>No Site attached</p>
+                    }
+                    else
+                    {
+                        <p>@string.Join(", ", country.Sites.Select(site => site.SiteId))</p>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Edit", new { id = country.CountryId })">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", new { id = country.CountryId })">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

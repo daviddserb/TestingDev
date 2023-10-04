@@ -1,5 +1,5 @@
-﻿using DavidSerb.Web.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using DavidSerb.DataModel.Data;
+using DavidSerb.DataModel.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,10 +10,9 @@ using System.Web.Mvc;
 
 namespace DavidSerb.Web.Controllers
 {
-    [Route("country")]
     public class CountryController : Controller
     {
-        public static AppDataContext dbContext = new AppDataContext();
+        public static AppDbContext dbContext = new AppDbContext();
 
         [Route("")]
         public ActionResult Index()
@@ -47,12 +46,11 @@ namespace DavidSerb.Web.Controllers
             if (!ModelState.IsValid) return View();
 
             dbContext.Countries.Add(country);
-            await dbContext.SaveChangesAsync(); // ??? TODO: sa vad daca ajuta await => daca nu, scot Task<> din method's signature. (cred ca ajuta, altfel da eroare: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext.)
+            await dbContext.SaveChangesAsync();
 
             return Redirect("./Index");
         }
 
-        // ??? TODO: daca schimb numele parametrului din id int countryId => nu mai merge.
         [HttpGet, Route("edit/{id:int}")]
         public ActionResult Edit(int id)
         {
@@ -62,8 +60,6 @@ namespace DavidSerb.Web.Controllers
             return View(selectedCountry);
         }
 
-        // ??? TODO: daca pun verbul HttpPut si Route => nu mai merge (pe tutoriale, la Edit, foloseaca verbul HttpPost, de ce?)
-        //[HttpPut, Route("edit/{id:int}")]
         public ActionResult Edit(int id, Country editedCountry)
         {
             if (!ModelState.IsValid) return View();
@@ -80,11 +76,9 @@ namespace DavidSerb.Web.Controllers
             return Redirect("../Index");
         }
 
-        // ??? - TODO: de ce daca ii pun HttpDelete si Route nu mai imi intra in ruta asta...
-        //[HttpDelete, Route("delete/{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            Country selectedCountry = dbContext.Countries.FirstOrDefault(country => country.CountryId == id.ToString());
+            Country selectedCountry = dbContext.Countries.FirstOrDefault(country => country.CountryId == id);
             if (selectedCountry == null) return HttpNotFound();
 
             dbContext.Remove(selectedCountry);

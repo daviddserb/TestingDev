@@ -1,6 +1,8 @@
 ﻿
 using DavidSerb.DataModel;
+using DavidSerb.DataModel.Data;
 using DavidSerb.DataModel.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +13,16 @@ namespace DavidSerb.Domain.CorrelationService
 {
     public class DepotCorrelationService : BaseCorrelationService<List<CorrelateData>>
     {
-        public DepotCorrelationService(SystemDataSet dataSet) : base(dataSet) { }
+        public DepotCorrelationService(AppDbContext dbContext) : base(dbContext) { }
 
         public override List<CorrelateData> CorrelateData()
         {
-            SystemDataSet dataSet = this.DataSet;
+            AppDbContext dbContext = DbContext;
 
-            List<Depot> depots = dataSet.Depots;
-            List<DrugUnit> drugUnits = dataSet.DrugUnits;
+            List<Depot> depots = dbContext.Depots.ToList();
+            List<DrugUnit> drugUnits = dbContext.DrugUnits
+                .Include(drugUnit => drugUnit.DrugType)
+                .ToList();
 
             // BEFORE (foreach loops):
             //List<CorrelateData> correlateData = new List<CorrelateData>();
@@ -43,10 +47,10 @@ namespace DavidSerb.Domain.CorrelationService
             //}
 
             // Testing
-            var x = depots.SelectMany(depot => depot.Countries);
-            var a = depots.Select(depot => drugUnits.Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId));
-            var b = depots.SelectMany(depot => drugUnits.Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId));
-            var c = depots.SelectMany(depot => drugUnits.Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId).SelectMany(drugUnit => depot.Countries));
+            //var x = depots.SelectMany(depot => depot.Countries);
+            //var a = depots.Select(depot => drugUnits.Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId));
+            //var b = depots.SelectMany(depot => drugUnits.Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId));
+            //var c = depots.SelectMany(depot => drugUnits.Where(drugUnit => drugUnit.Depot?.DepotId == depot.DepotId).SelectMany(drugUnit => depot.Countries));
 
             // AFTER (LINQ):
             var correlateData = depots

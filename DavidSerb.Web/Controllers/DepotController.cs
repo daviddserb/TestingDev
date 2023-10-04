@@ -1,4 +1,6 @@
-﻿using DavidSerb.Web.Models;
+﻿using DavidSerb.DataModel.Data;
+using DavidSerb.DataModel.Models;
+using DavidSerb.Domain.CorrelationService;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,12 +11,12 @@ using System.Web.Mvc;
 
 namespace DavidSerb.Web.Controllers
 {
-    [Route("depot")]
     public class DepotController : Controller
     {
-        public static AppDataContext dbContext = new AppDataContext();
+        public static AppDbContext dbContext = new AppDbContext();
+        public static DepotCorrelationService depotCorrelationService = new DepotCorrelationService(dbContext);
 
-        [Route("")]
+        [HttpGet, Route("")]
         public ActionResult Index()
         {
             List<Depot> depots = dbContext.Depots
@@ -22,6 +24,14 @@ namespace DavidSerb.Web.Controllers
                 .ToList();
 
             return View(depots);
+        }
+
+        [HttpGet]
+        public ActionResult DepotUnits()
+        {
+            List<CorrelateData> depotUnits = depotCorrelationService.CorrelateData();
+
+            return View(depotUnits);
         }
 
         [HttpGet, Route("create")]

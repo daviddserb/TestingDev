@@ -1,4 +1,4 @@
-﻿@model DavidSerb.Web.Models.DrugUnit
+﻿@model DavidSerb.DataModel.Models.DrugUnit
 
 @{
     Layout = null;
@@ -8,7 +8,7 @@
 
 <fieldset>
     @using (Html.BeginForm())
-     {
+    {
         <p>
             @Html.LabelFor(drugUnit => drugUnit.DrugUnitId)
             @Html.EditorFor(drugUnit => drugUnit.DrugUnitId)
@@ -17,8 +17,8 @@
         <p>
             @Html.LabelFor(drugUnit => drugUnit.PickNumber)
             @Html.TextBoxFor(drugUnit => drugUnit.PickNumber)
-            @Html.ValidationMessageFor(drugUnit => drugUnit.PickNumber, "", new { style = "color: red"});
+            @Html.ValidationMessageFor(drugUnit => drugUnit.PickNumber, "", new { style = "color: red" });
         </p>
         <button class="btn btn-primary" type="submit">Create</button>
-     }
+    }
 </fieldset>

@@ -1,0 +1,27 @@
+﻿@model List<DavidSerb.DataModel.Models.CorrelateData>
+
+<h1>Correlate Data</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Depot</th>
+            <th>Country</th>
+            <th>DrugType</th>
+            <th>DrugUnit-Id</th>
+            <th>DrugUnit-PickNumber</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in Model)
+        {
+        <tr>
+            <td>@data.DepotName</td>
+            <td>@data.CountryName</td>
+            <td>@data.DrugTypeName</td>
+            <td>@data.DrugUnitId</td>
+            <td>@data.PickNumber</td>
+        </tr>
+        }
+    </tbody>
+</table>

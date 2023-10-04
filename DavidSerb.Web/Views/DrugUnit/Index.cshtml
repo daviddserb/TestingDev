@@ -1,4 +1,4 @@
-﻿@model List<DavidSerb.Web.Models.DrugUnit>
+﻿@model List<DavidSerb.DataModel.Models.DrugUnit>
 
 <h1>DrugUnits</h1>
 
@@ -16,49 +16,49 @@
     <tbody>
         @foreach (var drugUnit in Model)
         {
-        <tr>
-            <td>@drugUnit.DrugUnitId</td>
-            <td>@drugUnit.PickNumber</td>
-            <td>
-                @if (drugUnit.Depot == null)
-                {
-                    <p>No Depot attached</p>
-                }
-                else
-                {
-                    <p>@drugUnit.Depot.DepotName</p>
-                }
-            </td>
-            <td>
-                @if (drugUnit.DrugType == null)
-                {
-                    <p>No DrugType attached</p>
-                }
-                else
-                {
-                    <p>@drugUnit.DrugType.DrugTypeName</p>
-                }
-            </td>
-            <td>
-                @if (drugUnit.Site == null)
-                {
-                    <p>No Site attached</p>
-                }
-                else
-                {
-                    <p>@drugUnit.Site.SiteName</p>
-                }
-            </td>
-            <td>
-                <a class="btn btn-primary" href="@Url.Action("Edit", new { id = drugUnit.DrugUnitId })">Edit</a>
-                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = drugUnit.DrugUnitId })">Delete</a>
-                @*TODO: Sa mai adaug o functionalitate de Move to Site, adica ii scot DepotId-ul si il pun la SiteId*@
-            </td>
-        </tr>
+            <tr>
+                <td>@drugUnit.DrugUnitId</td>
+                <td>@drugUnit.PickNumber</td>
+                <td>
+                    @if (drugUnit.Depot == null)
+                    {
+                        <p>No Depot attached</p>
+                    }
+                    else
+                    {
+                        <p>@drugUnit.Depot.DepotName</p>
+                    }
+                </td>
+                <td>
+                    @if (drugUnit.DrugType == null)
+                    {
+                        <p>No DrugType attached</p>
+                    }
+                    else
+                    {
+                        <p>@drugUnit.DrugType.DrugTypeName</p>
+                    }
+                </td>
+                <td>
+                    @if (drugUnit.Site == null)
+                    {
+                        <p>No Site attached</p>
+                    }
+                    else
+                    {
+                        <p>@drugUnit.Site.SiteName</p>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Edit", new { id = drugUnit.DrugUnitId })">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", new { id = drugUnit.DrugUnitId })">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
 
 <p>
     <a class="btn btn-primary" href="@Url.Action("Create")">Create new</a>
+    <a class="btn btn-primary" href="@Url.Action("GroupedDrugUnits")">Grouped Drug Units</a>
 </p>

@@ -16,12 +16,12 @@ namespace DavidSerb
     {
         public static SystemDataSet DataSet = new SystemDataSet();
 
+        public static AppDbContext dbContext = new AppDbContext();
+
         public static DepotInventoryService depotInventoryService = new DepotInventoryService();
-        public static DepotCorrelationService depotCorrelationService = new DepotCorrelationService(DataSet);
+        public static DepotCorrelationService depotCorrelationService = new DepotCorrelationService(dbContext);
         public static SiteDistributionService siteDistributionService = new SiteDistributionService();
         public static SiteInventoryDbHander siteInventoryDbHandler = new SiteInventoryDbHander();
-
-        public static AppDbContext dbContext = new AppDbContext();
 
         static void Main(string[] args)
         {
@@ -118,8 +118,8 @@ namespace DavidSerb
             DrugUnit drugUnit19 = new DrugUnit("DEV666", 280);
             DrugUnit drugUnit20 = new DrugUnit("DEV555", 290);
 
-            DrugType drugType1 = new DrugType("1", "DrugType1");
-            DrugType drugType2 = new DrugType("2", "DrugType2");
+            DrugType drugType1 = new DrugType("1", "DrugType1", 31.3m);
+            DrugType drugType2 = new DrugType("2", "DrugType2", 12);
 
             Site site1 = new Site("SiteId1", "SiteA", "1");
             Site site2 = new Site("SiteId2", "SiteB", "1");
