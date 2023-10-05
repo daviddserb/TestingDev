@@ -19,7 +19,9 @@ namespace DavidSerb.Domain.CorrelationService
         {
             AppDbContext dbContext = DbContext;
 
-            List<Depot> depots = dbContext.Depots.ToList();
+            List<Depot> depots = dbContext.Depots
+                .Include(depot => depot.Countries)
+                .ToList();
             List<DrugUnit> drugUnits = dbContext.DrugUnits
                 .Include(drugUnit => drugUnit.DrugType)
                 .ToList();

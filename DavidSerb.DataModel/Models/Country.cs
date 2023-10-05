@@ -24,7 +24,7 @@ namespace DavidSerb.DataModel.Models
 
         public ICollection<Site> Sites { get; set; }
 
-        public Country() {} // ??? TODO: sa vad daca am nevoie
+        public Country() {}
 
         public Country(string countryId, string countryName)
         {

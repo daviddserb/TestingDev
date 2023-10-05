@@ -10,6 +10,7 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+            @*HAMBURGER BUTTON*@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -30,10 +31,14 @@
     </div>
 
     <div class="container body-content">
+        @*Print the Views here*@
         @RenderBody()
-        <hr />
-        <footer>
-            <p>Serb David Copyright &copy; @DateTime.Now.Year</p>
+    </div>
+
+    <div>
+        <footer class="container">
+            <hr />
+            <p style="text-align:center">Serb David Copyright &copy; @DateTime.Now.Year</p>
         </footer>
     </div>
 

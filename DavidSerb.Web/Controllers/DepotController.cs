@@ -2,11 +2,9 @@
 using DavidSerb.DataModel.Models;
 using DavidSerb.Domain.CorrelationService;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DavidSerb.Web.Controllers
@@ -17,11 +15,13 @@ namespace DavidSerb.Web.Controllers
         public static DepotCorrelationService depotCorrelationService = new DepotCorrelationService(dbContext);
 
         [HttpGet, Route("")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            List<Depot> depots = dbContext.Depots
+            List<Depot> depots = await dbContext.Depots
+                .AsNoTracking()
                 .Include(Depot => Depot.Countries)
-                .ToList();
+                .ToListAsync();
+            if (!depots.Any()) return HttpNotFound();
 
             return View(depots);
         }
@@ -30,7 +30,6 @@ namespace DavidSerb.Web.Controllers
         public ActionResult DepotUnits()
         {
             List<CorrelateData> depotUnits = depotCorrelationService.CorrelateData();
-
             return View(depotUnits);
         }
 
@@ -45,7 +44,7 @@ namespace DavidSerb.Web.Controllers
         {
             if (!ModelState.IsValid) return View();
 
-            dbContext.Depots.Add(depot);
+            await dbContext.Depots.AddAsync(depot);
             await dbContext.SaveChangesAsync();
 
             return Redirect("./Index");
@@ -60,28 +59,28 @@ namespace DavidSerb.Web.Controllers
             return View(selectedDepot);
         }
 
-        public ActionResult Edit(int id, Depot editedDepot)
+        public async Task<ActionResult> Edit(int id, Depot editedDepot)
         {
             if (!ModelState.IsValid) return View();
 
             if (id.ToString() != editedDepot.DepotId) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
-            Depot existingDepot = dbContext.Depots.Find(editedDepot.DepotId);
+            Depot existingDepot = await dbContext.Depots.FindAsync(editedDepot.DepotId);
             if (existingDepot == null) return HttpNotFound();
 
             existingDepot.DepotName = editedDepot.DepotName;
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             return Redirect("../Index");
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            Depot selectedDepot = dbContext.Depots.FirstOrDefault(depot => depot.DepotId == id.ToString());
+            Depot selectedDepot = await dbContext.Depots.FirstOrDefaultAsync(depot => depot.DepotId == id.ToString());
             if (selectedDepot == null) return HttpNotFound();
 
             dbContext.Remove(selectedDepot);
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             return Redirect("../Index");
         }

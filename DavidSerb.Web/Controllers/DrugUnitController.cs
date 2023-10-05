@@ -16,23 +16,25 @@ namespace DavidSerb.Web.Controllers
         public static AppDbContext dbContext = new AppDbContext();
 
         [Route("")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            List<DrugUnit> drugUnits = dbContext.DrugUnits
+            List<DrugUnit> drugUnits = await dbContext.DrugUnits
+                .AsNoTracking()
                 .Include(drugUnit => drugUnit.Depot)
                 .Include(drugUnit => drugUnit.DrugType)
                 .Include(drugUnit => drugUnit.Site)
-                .ToList();
+                .ToListAsync();
+            if (!drugUnits.Any()) return HttpNotFound();
 
             return View(drugUnits);
         }
 
         [HttpGet]
-        public ActionResult GroupedDrugUnits()
+        public async Task<ActionResult> GroupedDrugUnits()
         {
-            IList<DrugUnit> drugUnits = dbContext.DrugUnits
+            IList<DrugUnit> drugUnits = await dbContext.DrugUnits
                 .Include(drugUnit => drugUnit.DrugType)
-                .ToList();
+                .ToListAsync();
 
             Dictionary<string, List<DrugUnit>> drugUnitsDict = drugUnits.ToGroupedDrugUnits();
 
@@ -52,45 +54,45 @@ namespace DavidSerb.Web.Controllers
         {
             if (!ModelState.IsValid) return View();
 
-            dbContext.DrugUnits.Add(drugUnit);
+            await dbContext.DrugUnits.AddAsync(drugUnit);
             await dbContext.SaveChangesAsync();
 
             return Redirect("./Index");
         }
 
         [HttpGet, Route("edit/{id}")]
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
-            DrugUnit selectedDrugUnit = dbContext.DrugUnits.FirstOrDefault(drugUnit => drugUnit.DrugUnitId == id);
+            DrugUnit selectedDrugUnit = await dbContext.DrugUnits.FirstOrDefaultAsync(drugUnit => drugUnit.DrugUnitId == id);
             if (selectedDrugUnit == null) return HttpNotFound();
 
             return View(selectedDrugUnit);
         }
 
-        public ActionResult Edit(string id, DrugUnit editedDrugUnit)
+        public async Task<ActionResult> Edit(string id, DrugUnit editedDrugUnit)
         {
             if (!ModelState.IsValid) return View();
 
             if (id != editedDrugUnit.DrugUnitId) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
-            DrugUnit existingDrugUnit = dbContext.DrugUnits.Find(editedDrugUnit.DrugUnitId);
+            DrugUnit existingDrugUnit = await dbContext.DrugUnits.FindAsync(editedDrugUnit.DrugUnitId);
             if (existingDrugUnit == null) return HttpNotFound();
 
             existingDrugUnit.PickNumber = editedDrugUnit.PickNumber;
             existingDrugUnit.DepotId = editedDrugUnit.DepotId;
             existingDrugUnit.DrugTypeId = editedDrugUnit.DrugTypeId;
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             return Redirect("../Index");
         }
 
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            DrugUnit selectedDrugUnit = dbContext.DrugUnits.FirstOrDefault(drugUnit => drugUnit.DrugUnitId == id);
+            DrugUnit selectedDrugUnit = await dbContext.DrugUnits.FirstOrDefaultAsync(drugUnit => drugUnit.DrugUnitId == id);
             if (selectedDrugUnit == null) return HttpNotFound();
 
             dbContext.Remove(selectedDrugUnit);
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             return Redirect("../Index");
         }

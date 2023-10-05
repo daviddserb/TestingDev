@@ -1,9 +1,4 @@
-﻿@*@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"*@
-@model DavidSerb.DataModel.Models.Country
-
-@{
-    Layout = null;
-}
+﻿@model DavidSerb.DataModel.Models.Country
 
 <h1>Create Country</h1>
 
@@ -22,21 +17,4 @@
         </p>
         <button class="btn btn-primary" type="submit">Create</button>
      }
-
-    @*TODO: sa incerc sa implementez form-ul folosind tag helpers in loc de html helpers*@
-    @*<form asp-controller="Country" asp-action="Create">
-        <p>
-            <label asp-for="CountryId"></label>
-            <input asp-for="CountryId" class="form-control" placeholder="Country Id">
-            <span asp-validation-for="CountryId"></span>
-        </p>
-        <p>
-            <label asp-for="CountryName"></label>
-            <input asp-for="CountryName" class="form-control" placeholder="Country Name">
-            <span asp-validation-for="CountryName"></span>
-        </p>
-        <p>
-            <button type="submit">Create Country</button>
-        </p>
-    </form>*@
 </fieldset>

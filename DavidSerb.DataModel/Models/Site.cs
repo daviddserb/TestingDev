@@ -22,7 +22,7 @@ namespace DavidSerb.DataModel.Models
         public string CountryCode { get; set; }
         public Country Country { get; set; }
 
-        public Site() { }
+        public Site() {}
 
         public Site(string siteId, string siteName, string countryCode)
         {
